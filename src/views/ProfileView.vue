@@ -12,7 +12,6 @@ const { userData } = useApplicationStore()
             <h1 class="fs-3">Profile</h1>
           </div>
           <div>
-            <!-- @EXERCISE: Create a nice component to present user data -->
             <pre>{{ userData }}</pre>
           </div>
         </div>

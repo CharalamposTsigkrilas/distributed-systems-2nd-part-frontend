@@ -66,11 +66,6 @@ onBeforeMount(() => {
           </div>
           <form v-else>
             <div class="mb-2" v-if="authenticationFailed">
-              <!--
-              @EXERCISE: Be more specific.
-              E.g., user does not exist, credentials are not valid, etc.
-              Always consider security, i.e., sometimes you may not want to unveil information.
-              -->
               <div class="alert alert-danger" role="alert">Authentication failed!</div>
             </div>
             <div class="mb-2">
