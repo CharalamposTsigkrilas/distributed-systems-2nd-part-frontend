@@ -15,29 +15,29 @@ const applicationStore = useApplicationStore()
           <span class="fs-5 fw-bolder text-white">API Client</span>
         </a>
         <ul class="nav nav-pills">
-          <!-- @EXERCISE: Add different color to active link (improve UX/UX). -->
-          <!-- @EXERCISE: Add different color to active link with nested routes (improve UX/UX). -->
-          <!-- @EXERCISE: Hide links that users has no access to. -->
           <li class="nav-item" v-if="applicationStore.isAuthenticated === true">
             <router-link :to="{ name: 'home' }" class="nav-link text-white">Home</router-link>
           </li>
+
+
           <!-- <li class="nav-item" v-if="applicationStore.isAuthenticated === true">
-                        <router-link :to="{ name: 'students' }" class="nav-link text-white"
-                            >Students</router-link
-                        >
-                    </li>
-                    <li class="nav-item" v-if="applicationStore.isAuthenticated === true">
-                        <router-link :to="{ name: 'courses' }" class="nav-link text-white"
-                            >Courses</router-link
-                        >
-                    </li> -->
+            <router-link :to="{ name:'citizen'}" class="nav-link text-white">Citizen</router-link>
+          </li>
           <li class="nav-item" v-if="applicationStore.isAuthenticated === true">
-            <router-link :to="{ name: 'profile' }" class="nav-link text-white"
-              >Profile
-              <span style="font-size: 10px"
-                >({{ applicationStore.userData?.username }})</span
-              ></router-link
-            >
+            <router-link :to="{ name:'doctor'}" class="nav-link text-white">Doctor</router-link>
+          </li> -->
+          <li class="nav-item" v-if="applicationStore.isAuthenticated === true">
+            <router-link :to="{ name:'citizens'}" class="nav-link text-white">Citizens</router-link>
+          </li>
+          <li class="nav-item" v-if="applicationStore.isAuthenticated === true">
+            <router-link :to="{ name:'doctors'}" class="nav-link text-white">Doctors</router-link>
+          </li>
+
+
+          <li class="nav-item" v-if="applicationStore.isAuthenticated === true">
+            <router-link :to="{ name: 'profile' }" class="nav-link text-white">Profile
+              <span style="font-size: 10px">({{ applicationStore.userData?.username }})</span>
+            </router-link>
           </li>
           <li class="nav-item" v-if="applicationStore.isAuthenticated === false">
             <router-link :to="{ name: 'login' }" class="nav-link text-white">Login</router-link>

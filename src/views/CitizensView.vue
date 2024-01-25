@@ -9,6 +9,7 @@ const { data, loading, performRequest } = useRemoteData(urlRef, authRef);
 onMounted(() => {
     performRequest();
 });
+
 </script>
 
 <template>
@@ -35,19 +36,19 @@ onMounted(() => {
                                 </tr>
                             </tbody>
                             <tbody v-if="data">
-                                <tr v-for="citizen in data._ebedded.citizens">
+
+                                <tr v-for="citizen in data._embedded.citizens" :key="citizen.id">
                                     <td>{{ citizen.id }}</td>
                                     <td>{{ citizen.fullName }}</td>
                                     <td>{{ citizen.email }}</td>
-                                    <td>{{ citizen.id }}</td>
-                                    <td>
+                                    <!-- <td>
                                         <RouterLink
                                             :to="{
                                                 name: 'citizen-details',
                                                 params: { id: citizen.id }
                                             }"
                                             >Display</RouterLink>
-                                    </td>
+                                    </td> -->
                                 </tr>
                             </tbody>
                         </table>
