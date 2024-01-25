@@ -41,35 +41,48 @@ const router = createRouter({
         }
       ]
     },
-    // {
-    //   path: '/citizen/:id',
-    //   name: 'citizen',
-    //   component: () => import('../views/CitizenView.vue'),
-    //   meta: { requiresAuth: true },
-    //   children: [
-    //     {
-    //       path: '',
-    //       name: 'citizen-details',
-    //       component: () => import('../views/CitizenDetailsView.vue'),
-    //       meta: { requiresAuth: true }
-    //     },
-    //     {
-    //       path: 'family',
-    //       name: 'citizen-family',
-    //       component: () => import('../views/CitizenFamilyView.vue'),
-    //       meta: { requiresAuth: true },
-    //       children: [
-    //         {
-    //           path: '',
-    //           name: 'citizen-family-details',
-    //           component: () => import('../views/CitizenFamilyDetailsView.vue'),
-    //           meta: { requiresAuth: true}
-    //           //Maybe a child here for appointment
-    //         }
-    //       ]
-    //     }
-    //   ]
-    // },
+    {
+      path: '/citizen/:id',
+      name: 'citizen',
+      component: () => import('../views/CitizenView.vue'),
+      meta: { requiresAuth: true },
+      children: [
+        {
+          path: '',
+          name: 'citizen-details',
+          component: () => import('../views/CitizenDetailsView.vue'),
+          meta: { requiresAuth: true }
+        },
+        {
+          path: 'family',
+          name: 'citizen-family',
+          component: () => import('../views/CitizenFamilyView.vue'),
+          meta: { requiresAuth: true },
+          children: [
+            {
+              path: '',
+              name: 'citizen-family-details',
+              component: () => import('../views/CitizenFamilyDetailsView.vue'),
+              meta: { requiresAuth: true},
+              children: [
+                {
+                  path: 'appointment',
+                  name: 'member-appointment',
+                  component: () => import('../views/AppointmentView.vue'),
+                  meta: { requiresAuth: true} 
+                }
+              ]
+            }
+          ]
+        },
+        {
+          path: 'family-doctor',
+          name: 'family-doctor',
+          component: () => import('../views/CitizenFamilyDoctorView.vue'),
+          meta: {requiresAuth: true }
+        }
+      ]
+    },
     {
       path: '/doctors',
       name: 'doctors',
@@ -115,20 +128,6 @@ const router = createRouter({
               meta: { requiresAuth: true }
             }
           ]
-        }
-      ]
-    },
-    {
-      path: '/citizens/:id',
-      name: 'citizen',
-      component: () => import('../views/CitizensView.vue'),
-      meta: { requiresAuth: true },
-      children: [
-        {
-          path: '',
-          name: 'citizen-details',
-          component: () => import('../views/CitizenDetailsView.vue'),
-          meta: { requiresAuth: true }
         }
       ]
     }

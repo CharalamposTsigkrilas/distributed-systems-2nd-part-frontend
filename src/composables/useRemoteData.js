@@ -33,8 +33,12 @@ export function useRemoteData(urlRef, authRef, methodRef = ref('GET'), bodyRef =
           })
         }
       })
+      // .then((responseData) => {
+      //   data.value = responseData;
+      // })
       .catch((err) => {
-        error.value = err
+        error.value = err.message
+        //throw err
       })
       .finally(() => {
         loading.value = false

@@ -1,13 +1,17 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, watchEffect, ref } from 'vue';
 import { useRemoteData } from '@/composables/useRemoteData.js';
 
-const urlRef = ref('http://localhost:9090/citizen');
+const urlRef = ref('http://localhost:9090/api/citizen');
 const authRef = ref(true);
 const { data, loading, performRequest } = useRemoteData(urlRef, authRef);
 
 onMounted(() => {
     performRequest();
+});
+
+watchEffect(() => {
+    console.log(data.value); // Log the data to inspect its structure
 });
 
 </script>
@@ -35,7 +39,7 @@ onMounted(() => {
                                     <td colspan="5">Loading...</td>
                                 </tr>
                             </tbody>
-                            <tbody v-if="data">
+                            <tbody v-else-if="data && data.length > 0">
 
                                 <tr v-for="citizen in data._embedded.citizens" :key="citizen.id">
                                     <td>{{ citizen.id }}</td>

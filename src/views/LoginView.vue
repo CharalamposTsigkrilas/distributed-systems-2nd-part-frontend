@@ -1,6 +1,4 @@
 <script setup>
-// @EXERCISE: If user is authenticated redirect to the requested URL.
-// @EXERCISE: If user is not authenticated, keep the requested URL and after a successful authentication redirect to the requested resource.
 import { onBeforeMount, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useApplicationStore } from '@/stores/application.js'
