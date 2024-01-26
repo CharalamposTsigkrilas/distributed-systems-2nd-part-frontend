@@ -36,19 +36,20 @@ onMounted(() => {
                                 </tr>
                             </tbody>
                             <tbody v-if="data">
-
-                                <tr v-for="doctor in data._embedded.doctors" :key="doctor.id">
+                                
+                                <tr v-if="Array.isArray(data)"></tr>
+                                <tr v-for="doctor in data" :key="doctor.id">
                                     <td>{{ doctor.id }}</td>
                                     <td>{{ doctor.fullName }}</td>
                                     <td>{{ doctor.email }}</td>
-                                    <!-- <td>
+                                    <td>
                                         <RouterLink
                                             :to="{
                                                 name: 'doctor-details',
                                                 params: { id: doctor.id }
                                             }"
                                             >Display</RouterLink>
-                                    </td> -->
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, watchEffect, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRemoteData } from '@/composables/useRemoteData.js';
 
 const urlRef = ref('http://localhost:9090/api/citizen');
@@ -8,10 +8,6 @@ const { data, loading, performRequest } = useRemoteData(urlRef, authRef);
 
 onMounted(() => {
     performRequest();
-});
-
-watchEffect(() => {
-    console.log(data.value); // Log the data to inspect its structure
 });
 
 </script>
@@ -39,20 +35,21 @@ watchEffect(() => {
                                     <td colspan="5">Loading...</td>
                                 </tr>
                             </tbody>
-                            <tbody v-else-if="data && data.length > 0">
+                            <tbody v-if="data">
 
-                                <tr v-for="citizen in data._embedded.citizens" :key="citizen.id">
+                                <tr v-if="Array.isArray(data)"></tr>
+                                <tr v-for="citizen in data" :key="citizen.id">
                                     <td>{{ citizen.id }}</td>
                                     <td>{{ citizen.fullName }}</td>
                                     <td>{{ citizen.email }}</td>
-                                    <!-- <td>
+                                    <td>
                                         <RouterLink
                                             :to="{
                                                 name: 'citizen-details',
                                                 params: { id: citizen.id }
                                             }"
                                             >Display</RouterLink>
-                                    </td> -->
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
