@@ -1,14 +1,21 @@
 <script setup>
-import { onMounted, ref } from 'vue';
-import { useRemoteData } from '@/composables/useRemoteData.js';
+import { useRouter } from 'vue-router'
+import { useRemoteData } from '@/composables/useRemoteData.js'
+import { onMounted, ref } from 'vue'
 
-const urlRef = ref('http://localhost:9090/api/citizen');
-const authRef = ref(true);
-const { data, loading, performRequest } = useRemoteData(urlRef, authRef);
+const urlRef = ref('http://localhost:9090/api/citizen')
+const authRef = ref(true)
+const { data, loading, performRequest } = useRemoteData(urlRef, authRef)
 
 onMounted(() => {
-    performRequest();
+    performRequest()
 });
+
+const router = useRouter()
+
+const onSubmit = () => {
+    router.push({ name: 'citizen-new'})
+}
 
 </script>
 
@@ -29,6 +36,7 @@ onMounted(() => {
                                     <th>Email</th>
                                     <th>Actions</th>
                                 </tr>
+                                <tr>.</tr>
                             </thead>
                             <tbody v-if="loading">
                                 <tr>
@@ -53,6 +61,7 @@ onMounted(() => {
                                 </tr>
                             </tbody>
                         </table>
+                        <button @click="onSubmit" type="submit" class="btn btn-primary">New Citizen</button>
                     </div>
                 </div>
             </div>

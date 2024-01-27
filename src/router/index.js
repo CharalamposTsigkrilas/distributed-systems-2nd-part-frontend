@@ -31,15 +31,13 @@ const router = createRouter({
       path: '/citizens',
       name: 'citizens',
       component: () => import('../views/CitizensView.vue'),
-      meta: { requiresAuth: true },
-      children: [
-        {
-          path: 'new',
-          name: 'citizen-new',
-          component: () => import('../views/CreateCitizenView.vue'),
-          meta: { requiresAuth: true }
-        }
-      ]
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/citizen/new',
+      name: 'citizen-new',
+      component: () => import('../views/CreateCitizenView.vue'),
+      meta: { requiresAuth: true }
     },
     {
       path: '/citizen/:id',
@@ -87,15 +85,13 @@ const router = createRouter({
       path: '/doctors',
       name: 'doctors',
       component: () => import('../views/DoctorsView.vue'),
-      meta: { requiresAuth: true },
-      children: [
-        {
-          path: 'new',
-          name: 'doctor-new',
-          component: () => import('../views/CreateDoctorView.vue'),
-          meta: { requiresAuth: true }
-        }
-      ]
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/doctor/new',
+      name: 'doctor-new',
+      component: () => import('../views/CreateDoctorView.vue'),
+      meta: { requiresAuth: true }
     },
     {
       path: '/doctor/:id',

@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from "vue";
+import { useRouter } from 'vue-router'
 import { useRemoteData } from "@/composables/useRemoteData.js";
 
 const formDataRef = ref({
@@ -14,15 +15,17 @@ const formDataRef = ref({
     "apartmentAddress": ""
 });
 
-const urlRef = ref("http://localhost:9090/citizen");
+const urlRef = ref("http://localhost:9090/api/citizen/new");
 const authRef = ref(true);
 const methodRef = ref("POST");
 
 const { data, performRequest } = useRemoteData(urlRef, authRef, methodRef, formDataRef);
 
+const router = useRouter()
 const onSubmit = () => {
     performRequest();
-};
+    router.push({ name: 'citizens'})
+}
 </script>
 
 <template>
@@ -47,7 +50,7 @@ const onSubmit = () => {
         </div>
         <div class="mb-2">
             <label for="email">Email</label>
-            <input class="form-control" id="email" v-model="formDataRef.email" type="text" />
+            <input class="form-control" id="email" v-model="formDataRef.email" type="email" />
         </div>
         <div class="mb-2">
             <label for="phoneNumber">Phone Number</label>
@@ -62,8 +65,8 @@ const onSubmit = () => {
             <input class="form-control" id="prefecture" v-model="formDataRef.prefecture" type="text" />
         </div>
         <div class="mb-2">
-            <label for="AMKA">AMKA</label>
-            <input class="form-control" id="AMKA" v-model="formDataRef.AMKA" type="text" />
+            <label for="amka">AMKA</label>
+            <input class="form-control" id="amka" v-model="formDataRef.amka" type="text" />
         </div>
         <div class="mb-2">
             <label for="apartmentAddress">Apartment Address</label>

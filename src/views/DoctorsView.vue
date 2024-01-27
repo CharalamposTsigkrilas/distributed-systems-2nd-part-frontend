@@ -1,6 +1,7 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router'
 import { useRemoteData } from '@/composables/useRemoteData.js';
+import { onMounted, ref } from 'vue';
 
 const urlRef = ref('http://localhost:9090/api/doctor');
 const authRef = ref(true);
@@ -9,6 +10,12 @@ const { data, loading, performRequest } = useRemoteData(urlRef, authRef);
 onMounted(() => {
     performRequest();
 });
+
+const router = useRouter()
+
+const onSubmit = () => {
+    router.push({ name: 'doctor-new'})
+}
 
 </script>
 
@@ -29,6 +36,7 @@ onMounted(() => {
                                     <th>Email</th>
                                     <th>Actions</th>
                                 </tr>
+                                <tr>.</tr>
                             </thead>
                             <tbody v-if="loading">
                                 <tr>
@@ -53,6 +61,7 @@ onMounted(() => {
                                 </tr>
                             </tbody>
                         </table>
+                        <button @click="onSubmit" type="submit" class="btn btn-primary">New Doctor</button>
                     </div>
                 </div>
             </div>
