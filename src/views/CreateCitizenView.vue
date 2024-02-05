@@ -24,8 +24,8 @@ const { data, performRequest } = useRemoteData(urlRef, authRef, methodRef, formD
 const router = useRouter()
 const onSubmit = () => {
     performRequest();
-    router.push({ name: 'citizens'})
-}
+    router.push({ name: 'home'});
+};
 </script>
 
 <template>

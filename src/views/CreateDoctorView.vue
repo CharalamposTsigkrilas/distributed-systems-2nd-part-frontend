@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import { useRouter } from 'vue-router'
+import { useRouter } from 'vue-router';
 import { useRemoteData } from "@/composables/useRemoteData.js";
 
 const formDataRef = ref({
@@ -14,7 +14,7 @@ const formDataRef = ref({
     "specialty": "",
     "doctorOfficeAddress": "",
     "maxNumberOfCitizens": ""
-})
+});
 
 const urlRef = ref("http://localhost:9090/api/doctor/new");
 const authRef = ref(true);
@@ -25,8 +25,8 @@ const { data, performRequest } = useRemoteData(urlRef, authRef, methodRef, formD
 const router = useRouter()
 const onSubmit = () => {
     performRequest();
-    router.push({ name: 'doctors'})
-}
+    router.push({ name: 'home'});
+};
 </script>
 
 
@@ -81,7 +81,7 @@ const onSubmit = () => {
         </div>
         
         <div class="">
-            <button class="btn btn-primary" @click="onSubmit" type="button">Create new citizen</button>
+            <button class="btn btn-primary" @click="onSubmit" type="button">Create new doctor</button>
         </div>
     </div>
 </template>

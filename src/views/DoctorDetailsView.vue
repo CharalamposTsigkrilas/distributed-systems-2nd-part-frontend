@@ -1,6 +1,6 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
+import { ref, computed, onMounted } from 'vue';
 import { useRemoteData } from '@/composables/useRemoteData.js';
 
 const route = useRoute();

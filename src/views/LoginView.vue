@@ -1,21 +1,21 @@
 <script setup>
-import { onBeforeMount, ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { useApplicationStore } from '@/stores/application.js'
+import { onBeforeMount, ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { useApplicationStore } from '@/stores/application.js';
 
-const router = useRouter()
-const { setUserData, persistUserData, isAuthenticated } = useApplicationStore()
+const router = useRouter();
+const { setUserData, persistUserData, isAuthenticated } = useApplicationStore();
 
-const loading = ref(false)
+const loading = ref(false);
 const credentials = ref({
   username: '',
   password: ''
-})
-const authenticationFailed = ref(false)
+});
+const authenticationFailed = ref(false);
 
 const onFormSubmit = () => {
-  loading.value = true
-  authenticationFailed.value = false
+  loading.value = true;
+  authenticationFailed.value = false;
 
   fetch('http://localhost:9090/api/auth/signin', {
     method: 'POST',
@@ -27,28 +27,28 @@ const onFormSubmit = () => {
     .then((response) => {
       if (response.ok) {
         response.json().then((data) => {
-          setUserData(data)
-          persistUserData()
-          router.push({ name: 'home' })
+          setUserData(data);
+          persistUserData();
+          router.push({ name: 'home' });
         })
       } else {
-        authenticationFailed.value = true
+        authenticationFailed.value = true;
       }
     })
     .catch((err) => {
-      console.warn(err)
-      authenticationFailed.value = true
+      console.warn(err);
+      authenticationFailed.value = true;
     })
     .finally(() => {
-      loading.value = false
-    })
+      loading.value = false;
+    });
 }
 
 onBeforeMount(() => {
   if (isAuthenticated === true) {
-    router.push({ name: 'home' })
+    router.push({ name: 'home' });
   }
-})
+});
 </script>
 
 <template>

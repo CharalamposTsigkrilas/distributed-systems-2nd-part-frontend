@@ -1,7 +1,11 @@
 <script setup>
-import { RouterLink } from 'vue-router'
-import { useApplicationStore } from '@/stores/application.js'
+import { computed } from 'vue';
+import { RouterLink } from 'vue-router';
+import { useApplicationStore } from '@/stores/application.js';
+
 const applicationStore = useApplicationStore()
+const userRoles = computed(()=> applicationStore.isAuthenticated ? applicationStore.userData.roles : []);
+
 </script>
 
 <template>
@@ -18,21 +22,19 @@ const applicationStore = useApplicationStore()
           <li class="nav-item" v-if="applicationStore.isAuthenticated === true">
             <router-link :to="{ name: 'home' }" class="nav-link text-white">Home</router-link>
           </li>
-
-
-          <!-- <li class="nav-item" v-if="applicationStore.isAuthenticated === true">
-            <router-link :to="{ name:'citizen'}" class="nav-link text-white">Citizen</router-link>
+          
+          <li class="nav-item" v-if="applicationStore.isAuthenticated === true && userRoles.includes('ROLE_CITIZEN')" >
+            <router-link :to="{ name:'citizen', params: { id: applicationStore.userData.id } }" class="nav-link text-white">Citizen</router-link>
           </li>
-          <li class="nav-item" v-if="applicationStore.isAuthenticated === true">
-            <router-link :to="{ name:'doctor'}" class="nav-link text-white">Doctor</router-link>
-          </li> -->
-          <li class="nav-item" v-if="applicationStore.isAuthenticated === true">
+          <li class="nav-item" v-if="applicationStore.isAuthenticated === true && userRoles.includes('ROLE_DOCTOR')">
+            <router-link :to="{ name:'doctor', params: { id: applicationStore.userData.id } }" class="nav-link text-white">Doctor</router-link>
+          </li>
+          <li class="nav-item" v-if="applicationStore.isAuthenticated === true && userRoles.includes('ROLE_ADMIN')">
             <router-link :to="{ name:'citizens'}" class="nav-link text-white">Citizens</router-link>
           </li>
-          <li class="nav-item" v-if="applicationStore.isAuthenticated === true">
+          <li class="nav-item" v-if="applicationStore.isAuthenticated === true && userRoles.includes('ROLE_ADMIN')">
             <router-link :to="{ name:'doctors'}" class="nav-link text-white">Doctors</router-link>
           </li>
-
 
           <li class="nav-item" v-if="applicationStore.isAuthenticated === true">
             <router-link :to="{ name: 'profile' }" class="nav-link text-white">Profile
@@ -45,6 +47,7 @@ const applicationStore = useApplicationStore()
           <li class="nav-item" v-if="applicationStore.isAuthenticated === true">
             <router-link :to="{ name: 'logout' }" class="nav-link text-white">Logout</router-link>
           </li>
+
         </ul>
       </div>
     </div>

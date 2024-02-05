@@ -1,13 +1,15 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
+const router = useRouter();
 
 const doctorIdRef = ref(null);
 
 onMounted(() => {
     doctorIdRef.value = route.params.id;
+    router.push({ name: 'doctor-details'});
 });
 </script>
 
@@ -17,7 +19,6 @@ onMounted(() => {
             <div class="row py-4 px-3">
                 <div class="col-12">
                     <div class="mb-4">
-                        <!-- <RouterLink class="small" :to="{ name: 'doctors' }">Back to Doctors</RouterLink> -->
                         <h1 class="fs-3">Doctor #{{ doctorIdRef }}</h1>
                     </div>
                     <div class="mb-4">

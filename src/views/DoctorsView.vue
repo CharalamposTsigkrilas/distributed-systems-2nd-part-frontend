@@ -1,5 +1,5 @@
 <script setup>
-import { useRouter } from 'vue-router'
+import { useRouter } from 'vue-router';
 import { useRemoteData } from '@/composables/useRemoteData.js';
 import { onMounted, ref } from 'vue';
 
@@ -11,11 +11,11 @@ onMounted(() => {
     performRequest();
 });
 
-const router = useRouter()
+const router = useRouter();
 
 const onSubmit = () => {
-    router.push({ name: 'doctor-new'})
-}
+    router.push({ name: 'doctor-new'});
+};
 
 </script>
 

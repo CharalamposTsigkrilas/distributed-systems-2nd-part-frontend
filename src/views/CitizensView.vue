@@ -1,21 +1,21 @@
 <script setup>
-import { useRouter } from 'vue-router'
-import { useRemoteData } from '@/composables/useRemoteData.js'
-import { onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router';
+import { useRemoteData } from '@/composables/useRemoteData.js';
+import { onMounted, ref } from 'vue';
 
-const urlRef = ref('http://localhost:9090/api/citizen')
-const authRef = ref(true)
-const { data, loading, performRequest } = useRemoteData(urlRef, authRef)
+const urlRef = ref('http://localhost:9090/api/citizen');
+const authRef = ref(true);
+const { data, loading, performRequest } = useRemoteData(urlRef, authRef);
 
 onMounted(() => {
-    performRequest()
+    performRequest();
 });
 
-const router = useRouter()
+const router = useRouter();
 
 const onSubmit = () => {
-    router.push({ name: 'citizen-new'})
-}
+    router.push({ name: 'citizen-new'});
+};
 
 </script>
 
