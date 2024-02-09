@@ -78,7 +78,13 @@ const router = createRouter({
           name: 'family-doctor',
           component: () => import('../views/CitizenFamilyDoctorView.vue'),
           meta: {requiresAuth: true }
-        }
+        },
+        {
+          path: 'doctor/find',
+          name: 'find-doctor',
+          component: () => import('../views/FindADoctorView.vue'),
+          meta: { requiresAuth: true}
+        },
       ]
     },
     {

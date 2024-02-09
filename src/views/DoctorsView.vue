@@ -36,7 +36,7 @@ const onSubmit = () => {
                                     <th>Email</th>
                                     <th>Actions</th>
                                 </tr>
-                                <tr>.</tr>
+                                <p></p>
                             </thead>
                             <tbody v-if="loading">
                                 <tr>

@@ -1,21 +1,21 @@
 <script setup>
-import { useRouter } from 'vue-router';
+import { onMounted, ref, computed } from 'vue';
+import { useRoute } from 'vue-router';
 import { useRemoteData } from '@/composables/useRemoteData.js';
-import { onMounted, ref } from 'vue';
 
-const urlRef = ref('http://localhost:9090/api/citizen');
+const route = useRoute();
+
+const citizenIdRef = ref(null);
+const urlRef = computed(() => {
+    return 'http://localhost:9090/api/citizen/' +citizenIdRef.value+ '/nearby/doctors';
+});
 const authRef = ref(true);
 const { data, loading, performRequest } = useRemoteData(urlRef, authRef);
 
 onMounted(() => {
+    citizenIdRef.value = route.params.id;
     performRequest();
 });
-
-const router = useRouter();
-
-const onSubmit = () => {
-    router.push({ name: 'citizen-new'});
-};
 
 </script>
 
@@ -24,9 +24,6 @@ const onSubmit = () => {
         <div class="container">
             <div class="row py-4 px-3">
                 <div class="col-12">
-                    <div class="mb-4">
-                        <h1 class="fs-3">Citizens</h1>
-                    </div>
                     <div>
                         <table class="table">
                             <thead>
@@ -44,24 +41,23 @@ const onSubmit = () => {
                                 </tr>
                             </tbody>
                             <tbody v-if="data">
-
+                                
                                 <tr v-if="Array.isArray(data)"></tr>
-                                <tr v-for="citizen in data" :key="citizen.id">
-                                    <td>{{ citizen.id }}</td>
-                                    <td>{{ citizen.fullName }}</td>
-                                    <td>{{ citizen.email }}</td>
+                                <tr v-for="doctor in data" :key="doctor.id">
+                                    <td>{{ doctor.id }}</td>
+                                    <td>{{ doctor.fullName }}</td>
+                                    <td>{{ doctor.email }}</td>
                                     <td>
                                         <RouterLink
                                             :to="{
-                                                name: 'citizen-details',
-                                                params: { id: citizen.id }
+                                                name: 'doctor-details',
+                                                params: { id: doctor.id }
                                             }"
                                             >Display</RouterLink>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                        <button @click="onSubmit" type="submit" class="btn btn-primary">New Citizen</button>
                     </div>
                 </div>
             </div>

@@ -27,7 +27,7 @@ onMounted(() => {
                     <th>Field Name</th>
                     <th>Field Value</th>
                 </tr>
-                <tr>.</tr>
+                <p></p>
             </thead>
             <tbody v-if="loading">
                 <tr>

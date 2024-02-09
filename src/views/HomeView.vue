@@ -30,7 +30,7 @@ if(userRoles.value.includes('ROLE_ADMIN')){
             <p>
               Logged in as: <strong>{{ userData.username }} ({{ role }})</strong>
             </p>
-            <!-- <ul>
+            <ul>
               <li class="nav-item" v-if="role==='admin'">
                 <RouterLink :to="{ name: 'citizens' }">Manage Citizens</RouterLink>
               </li>              
@@ -43,7 +43,7 @@ if(userRoles.value.includes('ROLE_ADMIN')){
               <li class="nav-item" v-if="role==='doctor'">
                 <RouterLink :to="{ name: 'doctor', params: { id: applicationStore.userData.id } }">View My Profile</RouterLink>
               </li>
-            </ul> -->
+            </ul>
           </div>
         </div>
       </div>

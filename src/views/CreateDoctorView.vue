@@ -23,9 +23,22 @@ const methodRef = ref("POST");
 const { data, performRequest } = useRemoteData(urlRef, authRef, methodRef, formDataRef);
 
 const router = useRouter()
+
+const validateInputs = () => {
+    for (const key in formDataRef.value) {
+        if (!formDataRef.value[key]) {
+            alert('Please fill all the attributes!');
+            return false;
+        }
+    }
+    return true;
+}
+
 const onSubmit = () => {
-    performRequest();
-    router.push({ name: 'home'});
+    if (validateInputs()) {
+        performRequest();
+        router.push({ name: 'home'});
+    }
 };
 </script>
 

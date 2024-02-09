@@ -1,7 +1,8 @@
 <script setup>
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { ref, computed, onMounted } from 'vue';
 import { useRemoteData } from '@/composables/useRemoteData.js';
+import { useApplicationStore } from '@/stores/application.js';
 
 const route = useRoute();
 
@@ -12,10 +13,25 @@ const urlRef = computed(() => {
 const authRef = ref(true);
 const { data, loading, performRequest } = useRemoteData(urlRef, authRef);
 
+const applicationStore = useApplicationStore();
+const userRoles = computed(()=> applicationStore.isAuthenticated ? applicationStore.userData.roles : []);
+
 onMounted(() => {
     doctorIdRef.value = route.params.id;
     performRequest();
 });
+
+const router = useRouter();
+
+const onSubmit = () => {
+
+
+    //Request for personal doctor
+
+
+    alert('Request has been sent successfully!');
+    router.push({ name: 'home'});    
+};
 </script>
 
 
@@ -27,7 +43,7 @@ onMounted(() => {
                     <th>Field Name</th>
                     <th>Field Value</th>
                 </tr>
-                <tr>.</tr>
+                <p></p>
             </thead>
             <tbody v-if="loading">
                 <tr>
@@ -81,5 +97,6 @@ onMounted(() => {
                 </tr>
             </tbody>
         </table>
+        <button v-if="userRoles.includes('ROLE_CITIZEN')" @click="onSubmit" type="submit" class="btn btn-primary">Send request!</button>
     </div>
 </template>
