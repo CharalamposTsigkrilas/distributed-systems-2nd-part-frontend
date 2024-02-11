@@ -36,6 +36,12 @@ onMounted(() => {
                             <li class="nav-item" v-if="!userRoles.includes('ROLE_CITIZEN')">
                                 <RouterLink
                                     class="nav-link"
+                                    :to="{ name: 'doctor-requests', params: { id: doctorIdRef } }"
+                                >Requests</RouterLink>
+                            </li>
+                            <li class="nav-item" v-if="!userRoles.includes('ROLE_CITIZEN')">
+                                <RouterLink
+                                    class="nav-link"
                                     :to="{ name: 'doctor-citizens', params: { id: doctorIdRef } }"
                                 >Citizens</RouterLink>
                             </li>

@@ -14,9 +14,17 @@ const authRef = ref(true);
 const { data, loading, performRequest } = useRemoteData(urlRef, authRef);
 
 const applicationStore = useApplicationStore();
-const userRoles = computed(()=> applicationStore.isAuthenticated ? applicationStore.userData.roles : []);
 
-onMounted(() => {
+const userRoles = computed(()=> applicationStore.isAuthenticated ? applicationStore.userData.roles : []);
+const requestStatus = computed(() => {
+    if (applicationStore.isAuthenticated && applicationStore.userData.request) {
+        return applicationStore.userData.request.currentStatus;
+    } else {
+        return null;
+    }
+});
+
+onMounted(() => {   
     citizenIdRef.value = route.params.id;
     performRequest();
 });
@@ -84,11 +92,22 @@ const onSubmit = () => {
                 </tr>
             </tbody>
             <tbody v-else>
-                <div>
-                    <p v-if="userRoles.includes('ROLE_CITIZEN')">You don't have family doctor!</p>
-                    <p v-if="userRoles.includes('ROLE_ADMIN')">This citizen doesn't have family doctor!</p>
-                </div>                                   
-                    <button v-if="userRoles.includes('ROLE_CITIZEN')" @click="onSubmit" type="submit" class="btn btn-primary">Find a Doctor!</button>
+                <div v-if="userRoles.includes('ROLE_CITIZEN') && (requestStatus===null || requestStatus==='rejected')">
+                    <h4>You don't have family doctor!</h4>
+                    <div>
+                        <button v-if="userRoles.includes('ROLE_CITIZEN')" @click="onSubmit" type="submit" class="btn btn-primary">Find a Doctor!</button>                                        
+                    </div>
+                </div> 
+                <div v-else-if="userRoles.includes('ROLE_CITIZEN') && requestStatus==='unseen'">
+                    <h4>You have already sent a request for a family doctor!</h4>
+                    <h4>Please wait for the doctor to Accept or Reject the request!</h4>
+                    <div>
+                        <button v-if="userRoles.includes('ROLE_CITIZEN')" @click="onSubmit" type="submit" class="btn btn-primary">Cancel the request!</button>                                        
+                    </div>
+                </div>
+                <div v-else-if="userRoles.includes('ROLE_ADMIN')">   
+                    <h4>This citizen doesn't have family doctor!</h4>
+                </div>    
             </tbody>
         </table>
     </div>

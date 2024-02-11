@@ -106,10 +106,22 @@ const router = createRouter({
       meta: { requiresAuth: true },
       children: [
         {
-          path: '',
+          path: 'det',
           name: 'doctor-details',
           component: () => import('../views/DoctorDetailsView.vue'),
           meta: { requiresAuth: true }
+        },
+        {
+          path: 'requests',
+          name: 'doctor-requests',
+          component: () => import('../views/DoctorRequestsView.vue'),
+          meta: { requiresAuth: true }
+        },
+        {
+          path: 'confirm/request',
+          name: 'confirm-request',
+          component: () => import('../views/ConfirmRequestView.vue'),
+          meta: {requiresAuth :true}
         },
         {
           path: 'appointments',

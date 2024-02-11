@@ -5,11 +5,12 @@ import { useRemoteData } from '@/composables/useRemoteData.js';
 import { useApplicationStore } from '@/stores/application.js';
 
 const route = useRoute();
-
 const doctorIdRef = ref(null);
+
 const urlRef = computed(() => {
     return 'http://localhost:9090/api/doctor/' + doctorIdRef.value;
 });
+
 const authRef = ref(true);
 const { data, loading, performRequest } = useRemoteData(urlRef, authRef);
 
@@ -24,13 +25,7 @@ onMounted(() => {
 const router = useRouter();
 
 const onSubmit = () => {
-
-
-    //Request for personal doctor
-
-
-    alert('Request has been sent successfully!');
-    router.push({ name: 'home'});    
+    router.push({ name: 'confirm-request' });
 };
 </script>
 
