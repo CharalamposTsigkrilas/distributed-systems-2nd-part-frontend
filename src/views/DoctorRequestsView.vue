@@ -16,7 +16,6 @@ const { data, loading, performRequest } = useRemoteData(urlRef, authRef);
 const applicationStore = useApplicationStore();
 const userRoles = computed(()=> applicationStore.isAuthenticated ? applicationStore.userData.roles : []);
 
-
 onMounted(() => {
     doctorIdRef.value = route.params.id;
     performRequest();
@@ -29,12 +28,16 @@ onMounted(() => {
         <div class="container">
             <div class="row py-4 px-3">
                 <div class="col-12">
+                    <div class="mb-4">
+                        <h1 class="fs-3">My Requests</h1>
+                    </div>
                     <div>
                         <table class="table">
                             <thead v-if="data">
                                 <tr>
                                     <th>ID</th>
                                     <th>Status</th>
+                                    <th>Actions</th>
                                 </tr>
                                 <p></p>
                             </thead>
@@ -48,14 +51,11 @@ onMounted(() => {
                                 <tr v-for="request in data" :key="request.id">
                                     <td>{{ request.id }}</td>
                                     <td>{{ request.currentStatus }}</td>
-                                    <!-- <td>
+                                    <td v-if="request.currentStatus==='unseen'">
                                         <RouterLink
-                                            :to="{
-                                                name: 'citizen-details',
-                                                params: { id: citizen.id }
-                                            }"
-                                            >Display</RouterLink>
-                                    </td> -->
+                                            :to="{ name: 'request-details', params: { id: request.id } }"
+                                        >Details</RouterLink>
+                                    </td>                
                                 </tr>
                             </tbody>
                             <tbody v-else>

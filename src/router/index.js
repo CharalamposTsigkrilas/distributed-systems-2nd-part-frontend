@@ -106,7 +106,7 @@ const router = createRouter({
       meta: { requiresAuth: true },
       children: [
         {
-          path: 'det',
+          path: '',
           name: 'doctor-details',
           component: () => import('../views/DoctorDetailsView.vue'),
           meta: { requiresAuth: true }
@@ -139,6 +139,32 @@ const router = createRouter({
               path: '',
               name: 'doctor-citizen-details',
               component: () => import('../views/CitizenDetailsView.vue'),
+              meta: { requiresAuth: true }
+            }
+          ]
+        },
+        {
+          path: '/request/:id',
+          name: 'request',
+          component: () => import('../views/RequestView.vue'),
+          meta: { requiresAuth: true },
+          children: [
+            {
+              path: '',
+              name: 'request-details',
+              component: () => import('../views/RequestDetailsView.vue'),
+              meta: { requiresAuth: true }
+            },
+            {
+              path: 'citizen',
+              name: 'request-citizen-details',
+              component: () => import('../views/RequestCitizenDetailsView.vue'),
+              meta: { requiresAuth: true }
+            },
+            {
+              path: 'answer-request',
+              name: 'request-answer',
+              component: () => import('../views/RequestAnswerView.vue'),
               meta: { requiresAuth: true }
             }
           ]

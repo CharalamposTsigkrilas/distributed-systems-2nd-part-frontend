@@ -94,6 +94,7 @@ const onSubmit = () => {
             <tbody v-else>
                 <div v-if="userRoles.includes('ROLE_CITIZEN') && (requestStatus===null || requestStatus==='rejected')">
                     <h4>You don't have family doctor!</h4>
+                    <h4 v-if="requestStatus==='rejected'">Your previous request was rejected.</h4>
                     <div>
                         <button v-if="userRoles.includes('ROLE_CITIZEN')" @click="onSubmit" type="submit" class="btn btn-primary">Find a Doctor!</button>                                        
                     </div>
