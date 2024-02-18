@@ -28,9 +28,6 @@ onMounted(() => {
         <div class="container">
             <div class="row py-4 px-3">
                 <div class="col-12">
-                    <div class="mb-4">
-                        <h1 class="fs-3">My Requests</h1>
-                    </div>
                     <div>
                         <table class="table">
                             <thead v-if="data">
@@ -51,11 +48,12 @@ onMounted(() => {
                                 <tr v-for="request in data" :key="request.id">
                                     <td>{{ request.id }}</td>
                                     <td>{{ request.currentStatus }}</td>
-                                    <td v-if="request.currentStatus==='unseen'">
+                                    <td>
                                         <RouterLink
-                                            :to="{ name: 'request-details', params: { id: request.id } }"
+                                            :to="{ name: 'request-details', params: { id: request.id } }" 
+                                            v-if="request.currentStatus==='unseen'"
                                         >Details</RouterLink>
-                                    </td>                
+                                    </td>             
                                 </tr>
                             </tbody>
                             <tbody v-else>

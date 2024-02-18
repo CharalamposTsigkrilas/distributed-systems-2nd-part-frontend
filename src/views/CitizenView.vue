@@ -42,6 +42,12 @@ onMounted(() => {
                                     :to="{ name: 'family-doctor', params: { id : citizenIdRef } }"
                                 >Family Doctor</RouterLink>
                             </li>
+                            <li class="nav-item">
+                                <RouterLink 
+                                    class="nav-link"
+                                    :to="{ name: 'citizen-request', params: { id : citizenIdRef } }"
+                                >Request</RouterLink>
+                            </li>
                         </ul>
                     </div>
                     <div>

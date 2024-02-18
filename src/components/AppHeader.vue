@@ -36,11 +36,11 @@ const userRoles = computed(()=> applicationStore.isAuthenticated ? applicationSt
             <router-link :to="{ name:'doctors'}" class="nav-link text-white">Doctors</router-link>
           </li>
 
-          <li class="nav-item" v-if="applicationStore.isAuthenticated === true">
+          <!-- <li class="nav-item" v-if="applicationStore.isAuthenticated === true">
             <router-link :to="{ name: 'profile' }" class="nav-link text-white">Profile
               <span style="font-size: 10px">({{ applicationStore.userData?.username }})</span>
             </router-link>
-          </li>
+          </li> -->
           <li class="nav-item" v-if="applicationStore.isAuthenticated === false">
             <router-link :to="{ name: 'login' }" class="nav-link text-white">Login</router-link>
           </li>

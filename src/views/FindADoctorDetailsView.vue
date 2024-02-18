@@ -1,7 +1,8 @@
 <script setup>
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { ref, computed, onMounted } from 'vue';
 import { useRemoteData } from '@/composables/useRemoteData.js';
+import { useApplicationStore } from '@/stores/application.js';
 
 const route = useRoute();
 const doctorIdRef = ref(null);
@@ -13,11 +14,19 @@ const urlRef = computed(() => {
 const authRef = ref(true);
 const { data, loading, performRequest } = useRemoteData(urlRef, authRef);
 
+const applicationStore = useApplicationStore();
+const userRoles = computed(()=> applicationStore.isAuthenticated ? applicationStore.userData.roles : []);
+
 onMounted(() => {
     doctorIdRef.value = route.params.id;
     performRequest();
 });
 
+const router = useRouter();
+
+const onSubmit = () => {
+    router.push({ name: 'confirm-request' });
+};
 </script>
 
 
@@ -83,5 +92,6 @@ onMounted(() => {
                 </tr>
             </tbody>
         </table>
+        <button v-if="userRoles.includes('ROLE_CITIZEN')" @click="onSubmit" type="submit" class="btn btn-primary">Send request!</button>
     </div>
 </template>

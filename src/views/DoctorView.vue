@@ -1,10 +1,6 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { useApplicationStore } from '@/stores/application.js';
-
-const applicationStore = useApplicationStore();
-const userRoles = computed(()=> applicationStore.isAuthenticated ? applicationStore.userData.roles : []);
 
 const route = useRoute();
 const router = useRouter();
@@ -33,19 +29,19 @@ onMounted(() => {
                                     :to="{ name: 'doctor-details', params: { id: doctorIdRef } }"
                                 >Details</RouterLink>
                             </li>
-                            <li class="nav-item" v-if="!userRoles.includes('ROLE_CITIZEN')">
+                            <li class="nav-item">
                                 <RouterLink
                                     class="nav-link"
                                     :to="{ name: 'doctor-requests', params: { id: doctorIdRef } }"
                                 >Requests</RouterLink>
                             </li>
-                            <li class="nav-item" v-if="!userRoles.includes('ROLE_CITIZEN')">
+                            <li class="nav-item">
                                 <RouterLink
                                     class="nav-link"
                                     :to="{ name: 'doctor-citizens', params: { id: doctorIdRef } }"
                                 >Citizens</RouterLink>
                             </li>
-                            <li class="nav-item" v-if="!userRoles.includes('ROLE_CITIZEN')">
+                            <li class="nav-item">
                                 <RouterLink 
                                     class="nav-link"
                                     :to="{ name: 'doctor-appointments', params: { id: doctorIdRef } }"
