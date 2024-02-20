@@ -26,7 +26,7 @@ onMounted(() => {
                 <div class="col-12">
                     <div>
                         <table class="table">
-                            <thead>
+                            <thead v-if="data">
                                 <tr>
                                     <th>ID</th>
                                     <th>Full Name</th>
@@ -40,8 +40,7 @@ onMounted(() => {
                                     <td colspan="5">Loading...</td>
                                 </tr>
                             </tbody>
-                            <tbody v-if="data">
-                                
+                            <tbody v-if="data">                                
                                 <tr v-if="Array.isArray(data)"></tr>
                                 <tr v-for="doctor in data" :key="doctor.id">
                                     <td>{{ doctor.id }}</td>
@@ -56,6 +55,9 @@ onMounted(() => {
                                         >Display</RouterLink>
                                     </td>
                                 </tr>
+                            </tbody>
+                            <tbody v-else>
+                                <div>No doctors found!</div>
                             </tbody>
                         </table>
                     </div>

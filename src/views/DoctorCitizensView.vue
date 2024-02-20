@@ -31,7 +31,8 @@ onMounted(() => {
                     <th>ID</th>
                     <th>Full Name</th>
                     <th>Email</th>
-                    <th>Actions</th>
+                    <th>Details</th>
+                    <th v-if="userRoles.includes('ROLE_DOCTOR')">Actions</th>
                 </tr>
                 <p></p>
             </thead>
@@ -53,6 +54,14 @@ onMounted(() => {
                                 params: { id: citizen.id }
                             }"
                         >Display</RouterLink>
+                    </td>
+                    <td v-if="userRoles.includes('ROLE_DOCTOR')">
+                        <RouterLink
+                            :to="{
+                                name: 'citizen-remove',
+                                params: { id: citizen.id }
+                            }"
+                        >Remove</RouterLink>
                     </td>
                 </tr>
             </tbody>

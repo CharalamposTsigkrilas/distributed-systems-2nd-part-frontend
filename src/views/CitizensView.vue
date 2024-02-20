@@ -29,7 +29,7 @@ const onSubmit = () => {
                     </div>
                     <div>
                         <table class="table">
-                            <thead>
+                            <thead v-if="data">
                                 <tr>
                                     <th>ID</th>
                                     <th>Full Name</th>
@@ -44,7 +44,6 @@ const onSubmit = () => {
                                 </tr>
                             </tbody>
                             <tbody v-if="data">
-
                                 <tr v-if="Array.isArray(data)"></tr>
                                 <tr v-for="citizen in data" :key="citizen.id">
                                     <td>{{ citizen.id }}</td>
@@ -59,6 +58,9 @@ const onSubmit = () => {
                                             >Display</RouterLink>
                                     </td>
                                 </tr>
+                            </tbody>
+                            <tbody v-else>
+                                <div>No citizens found!</div>
                             </tbody>
                         </table>
                         <button @click="onSubmit" type="submit" class="btn btn-primary">New Citizen</button>

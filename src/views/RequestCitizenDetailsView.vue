@@ -15,7 +15,6 @@ const { data, loading, performRequest } = useRemoteData(urlRef, authRef);
 
 const applicationStore = useApplicationStore();
 const userRoles = computed(()=> applicationStore.isAuthenticated ? applicationStore.userData.roles : []);
-const citizenFamilyMembers = computed(()=> applicationStore.isAuthenticated ? applicationStore.userData.familyMembers : []);
 
 onMounted(() => {
     requestIdRef.value = route.params.id;
@@ -75,10 +74,6 @@ const onSubmit = () => {
                     <th>AMKA</th>
                     <td>{{ data.amka }}</td>
                 </tr>
-                <!-- <tr>
-                    <th>Number of Famliy Members</th>
-                    <td>{{ citizenFamilyMembers.length}}</td>
-                </tr> -->
             </tbody>
         </table>
     </div>

@@ -1,8 +1,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
 import { useRemoteData } from '@/composables/useRemoteData.js';
-import { useApplicationStore } from '@/stores/application.js';
 
 const route = useRoute();
 const requestIdRef = ref(null);
@@ -13,19 +12,10 @@ const urlRef = computed(() => {
 const authRef = ref(true);
 const { data, loading, performRequest } = useRemoteData(urlRef, authRef);
 
-const applicationStore = useApplicationStore();
-const userRoles = computed(()=> applicationStore.isAuthenticated ? applicationStore.userData.roles : []);
-
 onMounted(() => {
     requestIdRef.value = route.params.id;
     performRequest();
 });
-
-const router = useRouter();
-
-const onSubmit = () => {
-    //router.push({ name: '', params: {id: requestIdRef.value} });
-};
 
 </script>
 
@@ -90,10 +80,7 @@ const onSubmit = () => {
                     <th>Maximum Number Of Citizens (as a family doctor)</th>
                     <td>{{ data.maxNumberOfCitizens }}</td>
                 </tr>
-            </tbody>          
+            </tbody>         
         </table>
     </div>
-    <!-- <div>
-        <button v-if="userRoles.includes('ROLE_DOCTOR')" @click="onSubmit" type="submit" class="btn btn-primary">Answer</button>
-    </div>  -->
 </template>

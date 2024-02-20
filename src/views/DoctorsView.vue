@@ -29,7 +29,7 @@ const onSubmit = () => {
                     </div>
                     <div>
                         <table class="table">
-                            <thead>
+                            <thead v-if="data">
                                 <tr>
                                     <th>ID</th>
                                     <th>Full Name</th>
@@ -59,6 +59,9 @@ const onSubmit = () => {
                                         >Display</RouterLink>
                                     </td>
                                 </tr>
+                            </tbody>
+                            <tbody v-else>
+                                <div>No doctors found!</div>
                             </tbody>
                         </table>
                         <button @click="onSubmit" type="submit" class="btn btn-primary">New Doctor</button>

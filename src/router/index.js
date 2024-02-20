@@ -82,6 +82,12 @@ const router = createRouter({
           meta: {requiresAuth: true }
         },
         {
+          path: 'doctor/remove',
+          name: 'doctor-remove',
+          component: () => import('../views/FamilyDoctorRemoveView.vue'),
+          meta: {requiresAuth: true }
+        },
+        {
           path: 'find/doctor',
           name: 'find-doctor',
           component: () => import('../views/FindADoctorView.vue'),
@@ -97,6 +103,12 @@ const router = createRouter({
           path: 'request/confirm',
           name: 'confirm-request',
           component: () => import('../views/ConfirmRequestView.vue'),
+          meta: {requiresAuth :true}
+        },
+        {
+          path: 'request/cancel',
+          name: 'delete-request',
+          component: () => import('../views/CancelRequestView.vue'),
           meta: {requiresAuth :true}
         },
         {
@@ -181,6 +193,12 @@ const router = createRouter({
             }
           ]
         },
+        {
+          path: 'citizen/remove',
+          name: 'citizen-remove',
+          component: () => import('../views/DoctorCitizenRemoveView.vue'),
+          meta: { requiresAuth: true}
+        }
       ]
     }
   ]

@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
 import { useRemoteData } from '@/composables/useRemoteData.js';
 import { useApplicationStore } from '@/stores/application.js';
 
@@ -20,12 +20,6 @@ onMounted(() => {
     appointmentIdRef.value = route.params.id;
     performRequest();
 });
-
-const router = useRouter();
-
-const onSubmit = () => {
-    //router.push({ name: 'new-appointment', params: { id: appointmentIdRef.value }});    
-};
 
 </script>
 
@@ -79,9 +73,6 @@ const onSubmit = () => {
                     <div>
                         <p>You don't have any appointments yet.</p>
                     </div>
-                    <!-- <div>
-                        <button @click="onSubmit" type="submit" class="btn btn-primary">Set an appointment</button>                                        
-                    </div> -->
                 </div> 
                 <div v-else-if="userRoles.includes('ROLE_ADMIN')">   
                     <p>This doctor doesn't have any appointment.</p>

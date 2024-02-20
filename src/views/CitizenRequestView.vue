@@ -27,6 +27,10 @@ const onSubmit = () => {
     router.push({ name: 'find-doctor', params: { id: citizenIdRef.value }});    
 };
 
+const onCancel = () => {
+    router.push({ name: 'delete-request', params: { id: data.value.id }});    
+};
+
 </script>
 
 
@@ -74,5 +78,9 @@ const onSubmit = () => {
                 </div>
             </tbody>
         </table>
+        <div v-if="data">
+            <button v-if="data.currentStatus==='rejected'" @click="onSubmit" type="submit" class="btn btn-primary">Find a Doctor</button>
+            <button v-if="data.currentStatus==='unseen'" @click="onCancel" type="submit" class="btn btn-primary">Cancel the request</button>
+        </div>
     </div>
 </template>

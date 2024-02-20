@@ -1,3 +1,3 @@
 <template>
-  <footer><!-- empty footer :) --></footer>
+  <footer></footer>
 </template>

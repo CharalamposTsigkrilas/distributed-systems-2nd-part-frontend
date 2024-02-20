@@ -28,6 +28,10 @@ const onSubmit = () => {
     router.push({ name: 'citizen-request', params: { id: citizenIdRef.value }});    
 };
 
+const onRemove = () => {
+    router.push({ name: 'doctor-remove', params: { id: citizenIdRef.value }});
+};
+
 </script>
 
 
@@ -85,7 +89,7 @@ const onSubmit = () => {
                     <div>
                         <p>You don't have a family doctor.</p>
                         <p>You have to make a request to get a family doctor.</p>
-                        <button v-if="userRoles.includes('ROLE_CITIZEN')" @click="onSubmit" type="submit" class="btn btn-primary">Go to requests</button>
+                        <button @click="onSubmit" type="submit" class="btn btn-primary">Go to requests</button>
                     </div>
                 </div> 
                 <div v-else-if="userRoles.includes('ROLE_ADMIN')">   
@@ -93,5 +97,8 @@ const onSubmit = () => {
                 </div>    
             </tbody>
         </table>
+        <div v-if="data && userRoles.includes('ROLE_CITIZEN')">
+            <button @click="onRemove" type="submit" class="btn btn-primary">Remove doctor</button>
+        </div>
     </div>
 </template>

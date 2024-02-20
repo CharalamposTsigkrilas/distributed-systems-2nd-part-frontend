@@ -83,8 +83,8 @@ const onSubmit = () => {
                         <button @click="onSubmit" type="submit" class="btn btn-primary">Set an appointment</button>                                        
                     </div>
                 </div> 
-                <div v-else-if="userRoles.includes('ROLE_ADMIN')">   
-                    <p>This citizen doesn't have any appointment.</p>
+                <div v-else>   
+                    <p>This family member doesn't have any appointment.</p>
                 </div>
             </tbody>
         </table>

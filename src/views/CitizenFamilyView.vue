@@ -33,7 +33,7 @@ const onSubmit = () => {
 <template>
     <div>
         <table class="table">
-            <thead>
+            <thead v-if="data">
                 <tr>
                     <th>ID</th>
                     <th>Full Name</th>
@@ -64,6 +64,9 @@ const onSubmit = () => {
                             >Display</RouterLink>
                     </td>
                 </tr>
+            </tbody>
+            <tbody v-else>
+                <div>No family members found!</div>
             </tbody>
         </table>
         <button  v-if="userRoles.includes('ROLE_CITIZEN')" @click="onSubmit" type="submit" class="btn btn-primary">New Family Member</button>
