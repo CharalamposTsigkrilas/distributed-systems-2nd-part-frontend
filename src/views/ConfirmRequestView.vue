@@ -34,6 +34,6 @@ const onSubmit = () => {
         <h4>Are you sure that you want to send request for this Doctor?</h4>
     </div>
     <div>
-        <button @click="onSubmit" type="submit" class="btn btn-primary">Confirm!</button>
+        <button @click="onSubmit" type="submit" class="btn btn-primary">Confirm</button>
     </div>
 </template>

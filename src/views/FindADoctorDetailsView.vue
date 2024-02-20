@@ -92,6 +92,6 @@ const onSubmit = () => {
                 </tr>
             </tbody>
         </table>
-        <button v-if="userRoles.includes('ROLE_CITIZEN')" @click="onSubmit" type="submit" class="btn btn-primary">Send request!</button>
+        <button v-if="userRoles.includes('ROLE_CITIZEN')" @click="onSubmit" type="submit" class="btn btn-primary">Send request</button>
     </div>
 </template>

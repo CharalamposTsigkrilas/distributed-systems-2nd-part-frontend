@@ -24,48 +24,40 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="bg-body-tertiary">
-        <div class="container">
-            <div class="row py-4 px-3">
-                <div class="col-12">
-                    <div>
-                        <table class="table">
-                            <thead v-if="data">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                                <p></p>
-                            </thead>
-                            <tbody v-if="loading">
-                                <tr>
-                                    <td colspan="5">Loading...</td>
-                                </tr>
-                            </tbody>
-                            <tbody v-if="data">
-                                <tr v-if="Array.isArray(data)"></tr>
-                                <tr v-for="request in data" :key="request.id">
-                                    <td>{{ request.id }}</td>
-                                    <td>{{ request.currentStatus }}</td>
-                                    <td>
-                                        <RouterLink
-                                            :to="{ name: 'request-details', params: { id: request.id } }" 
-                                            v-if="request.currentStatus==='unseen'"
-                                        >Details</RouterLink>
-                                    </td>             
-                                </tr>
-                            </tbody>
-                            <tbody v-else>
-                                <div>
-                                    <p v-if="userRoles.includes('ROLE_DOCTOR')">You don't have any requests yet!</p>
-                                    <p v-if="userRoles.includes('ROLE_ADMIN')">This doctor doesn't have any requests yet!</p>
-                                </div>
-                            </tbody>
-                        </table>
-                    </div>
+    <div>
+        <table class="table">
+            <thead v-if="data">
+                <tr>
+                    <th>ID</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+                <p></p>
+            </thead>
+            <tbody v-if="loading">
+                <tr>
+                    <td colspan="5">Loading...</td>
+                </tr>
+            </tbody>
+            <tbody v-if="data">
+                <tr v-if="Array.isArray(data)"></tr>
+                <tr v-for="request in data" :key="request.id">
+                    <td>{{ request.id }}</td>
+                    <td>{{ request.currentStatus }}</td>
+                    <td>
+                        <RouterLink
+                            :to="{ name: 'request-citizen-details', params: { id: request.id } }" 
+                            v-if="request.currentStatus==='unseen'"
+                        >Details</RouterLink>
+                    </td>             
+                </tr>
+            </tbody>
+            <tbody v-else>
+                <div>
+                    <p v-if="userRoles.includes('ROLE_DOCTOR')">You don't have any requests yet.</p>
+                    <p v-if="userRoles.includes('ROLE_ADMIN')">This doctor doesn't have any requests yet.</p>
                 </div>
-            </div>
-        </div>
+            </tbody>
+        </table>
     </div>
 </template>

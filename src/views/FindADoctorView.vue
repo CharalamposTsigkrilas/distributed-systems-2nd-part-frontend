@@ -53,7 +53,7 @@ onMounted(() => {
                                                 name: 'find-doctor-details',
                                                 params: { id: doctor.id }
                                             }"
-                                            >Display</RouterLink>
+                                        >Display</RouterLink>
                                     </td>
                                 </tr>
                             </tbody>

@@ -1,35 +1,33 @@
 <script setup>
-import { onMounted, ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { useApplicationStore } from '@/stores/application.js';
 import { useRemoteData } from '@/composables/useRemoteData.js';
+import { useApplicationStore } from '@/stores/application.js';
 
 const route = useRoute();
 
-const citizenIdRef = ref(null);
+const familyMemberIdRef = ref(null);
 const urlRef = computed(() => {
-    return 'http://localhost:9090/api/citizen/' +citizenIdRef.value+ '/doctor';
+    return 'http://localhost:9090/api/familyMember/' + familyMemberIdRef.value + '/appointment';
 });
 const authRef = ref(true);
 const { data, loading, performRequest } = useRemoteData(urlRef, authRef);
 
 const applicationStore = useApplicationStore();
-
 const userRoles = computed(()=> applicationStore.isAuthenticated ? applicationStore.userData.roles : []);
 
-onMounted(() => {   
-    citizenIdRef.value = route.params.id;
+onMounted(() => {
+    familyMemberIdRef.value = route.params.id;
     performRequest();
 });
 
 const router = useRouter();
 
 const onSubmit = () => {
-    router.push({ name: 'citizen-request', params: { id: citizenIdRef.value }});    
+    router.push({ name: 'new-appointment', params: { id: familyMemberIdRef.value }});    
 };
 
 </script>
-
 
 <template>
     <div>
@@ -48,49 +46,46 @@ const onSubmit = () => {
             </tbody>
             <tbody v-if="data">
                 <tr>
-                    <th>Full Name</th>
-                    <td>{{ data.fullName }}</td>
+                    <th>Date</th>
+                    <td>{{ data.date }}</td>
                 </tr>
                 <tr>
-                    <th>Email</th>
-                    <td>{{ data.email }}</td>
+                    <th>Time</th>
+                    <td>{{ data.time }}</td>
                 </tr>
                 <tr>
-                    <th>Phone number</th>
-                    <td>{{ data.phoneNumber }}</td>
+                    <th>Place</th>
+                    <td>{{ data.place }}</td>
                 </tr>
                 <tr>
-                    <th>Department</th>
-                    <td>{{ data.department }}</td>
+                    <th>Citizen Full Name</th>
+                    <td>{{ data.customerName }}</td>
                 </tr>
                 <tr>
-                    <th>Prefecture</th>
-                    <td>{{ data.prefecture }}</td>
+                    <th>AMKA</th>
+                    <td>{{ data.amka }}</td>
                 </tr>
                 <tr>
-                    <th>Specialty</th>
-                    <td>{{ data.specialty }}</td>
+                    <th>Doctor Full Name</th>
+                    <td>{{ data.doctorName }}</td>
                 </tr>
                 <tr>
-                    <th>Office Address</th>
-                    <td>{{ data.doctorOfficeAddress }}</td>
-                </tr>
-                <tr>
-                    <th>Rating</th>
-                    <td>{{ data.rating }}</td>
+                    <th>Situation</th>
+                    <td>{{ data.currentStatus }}</td>
                 </tr>
             </tbody>
             <tbody v-else>
                 <div v-if="userRoles.includes('ROLE_CITIZEN')">
                     <div>
-                        <p>You don't have a family doctor.</p>
-                        <p>You have to make a request to get a family doctor.</p>
-                        <button v-if="userRoles.includes('ROLE_CITIZEN')" @click="onSubmit" type="submit" class="btn btn-primary">Go to requests</button>
+                        <p>You don't have any appointments yet.</p>
+                    </div>
+                    <div>
+                        <button @click="onSubmit" type="submit" class="btn btn-primary">Set an appointment</button>                                        
                     </div>
                 </div> 
                 <div v-else-if="userRoles.includes('ROLE_ADMIN')">   
-                    <p>This citizen doesn't have family doctor.</p>
-                </div>    
+                    <p>This citizen doesn't have any appointment.</p>
+                </div>
             </tbody>
         </table>
     </div>

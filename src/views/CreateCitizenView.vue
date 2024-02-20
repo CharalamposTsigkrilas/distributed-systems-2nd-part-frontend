@@ -11,7 +11,7 @@ const formDataRef = ref({
     "phoneNumber": "",
     "department": "",
     "prefecture": "",
-    "AMKA": "",
+    "amka": "",
     "apartmentAddress": ""
 });
 
@@ -23,21 +23,9 @@ const { data, performRequest } = useRemoteData(urlRef, authRef, methodRef, formD
 
 const router = useRouter()
 
-const validateInputs = () => {
-    for (const key in formDataRef.value) {
-        if (!formDataRef.value[key]) {
-            alert('Please fill all the attributes!');
-            return false;
-        }
-    }
-    return true;
-}
-
 const onSubmit = () => {
-    if (validateInputs()) {
-        performRequest();
-        router.push({ name: 'home'});
-    }
+    performRequest();
+    router.push({ name: 'home'});
 };
 </script>
 
@@ -59,7 +47,7 @@ const onSubmit = () => {
         </div>
         <div class="mb-2">
             <label for="password">Password</label>
-            <input class="form-control" id="password" v-model="formDataRef.password" type="text" />
+            <input class="form-control" id="password" v-model="formDataRef.password" type="password" />
         </div>
         <div class="mb-2">
             <label for="email">Email</label>

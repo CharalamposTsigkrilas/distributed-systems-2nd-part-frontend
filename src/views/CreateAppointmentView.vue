@@ -4,21 +4,26 @@ import { useRouter, useRoute } from 'vue-router'
 import { useRemoteData } from "@/composables/useRemoteData.js";
 
 const formDataRef = ref({
-    "fullName": "",
-    "amka": "",
-    "memberRelationship": ""
+    "date": "",
+    "time": "",
+    "place": "",
+    "customerName": "",
+    "doctorName": "",
+    "evaluationGrade": "",
+    "currentStatus": "",
+    "amka": ""
 });
 
 const route = useRoute();
 
-const citizenIdRef = ref(null);
+const familyMemberIdRef = ref(null);
 
 onMounted(() => {
-    citizenIdRef.value = route.params.id;
+    familyMemberIdRef.value = route.params.id;
 });
 
 const urlRef = computed(() => {
-    return "http://localhost:9090/api/familyMember/new/for/citizen/" + citizenIdRef.value ;
+    return "http://localhost:9090/api/appointment/new/for/FamilyMember/" + familyMemberIdRef.value ;
 });
 const authRef = ref(true);
 const methodRef = ref("POST");
@@ -35,26 +40,26 @@ const onSubmit = () => {
 
 <template>
     <div class="container mb-4">
-        <h1>New Family Member</h1>
+        <h1>New Appointment</h1>
     </div>
     <div>
         <pre>{{ data }}</pre>
     </div>
     <div class="container mb-4">
         <div class="mb-2">
-            <label for="fullName">Full Name</label>
-            <input class="form-control" id="fullName" v-model="formDataRef.fullName" type="text" />
+            <label for="date">Date</label>
+            <input class="form-control" id="date" v-model="formDataRef.date" type="text" />
         </div>
         <div class="mb-2">
-            <label for="amka">AMKA</label>
-            <input class="form-control" id="amka" v-model="formDataRef.amka" type="text" />
+            <label for="time">Time</label>
+            <input class="form-control" id="time" v-model="formDataRef.time" type="text" />
         </div>
         <div class="mb-2">
-            <label for="memberRelationship">Relationship with citizen</label>
-            <input class="form-control" id="memberRelationship" v-model="formDataRef.memberRelationship" type="text" />
+            <label for="place">Place</label>
+            <input class="form-control" id="place" v-model="formDataRef.place" type="text" />
         </div>
         <div class="">
-            <button class="btn btn-primary" @click="onSubmit" type="button">Create new member</button>
+            <button class="btn btn-primary" @click="onSubmit" type="button">Done</button>
         </div>
     </div>
 </template>

@@ -8,14 +8,13 @@ const route = useRoute();
 const requestIdRef = ref(null);
 
 const urlRef = computed(() => {
-    return 'http://localhost:9090/api/request/' + requestIdRef.value + '/citizen';
+    return 'http://localhost:9090/api/request/' + requestIdRef.value + '/doctor';
 });
 const authRef = ref(true);
 const { data, loading, performRequest } = useRemoteData(urlRef, authRef);
 
 const applicationStore = useApplicationStore();
 const userRoles = computed(()=> applicationStore.isAuthenticated ? applicationStore.userData.roles : []);
-const citizenFamilyMembers = computed(()=> applicationStore.isAuthenticated ? applicationStore.userData.familyMembers : []);
 
 onMounted(() => {
     requestIdRef.value = route.params.id;
@@ -25,13 +24,13 @@ onMounted(() => {
 const router = useRouter();
 
 const onSubmit = () => {
-    router.push({ name: 'request-answer', params: {id: requestIdRef.value} });
+    //router.push({ name: '', params: {id: requestIdRef.value} });
 };
 
 </script>
 
 <template>
-    <h4>Citizen details</h4>
+    <h4>Doctor details</h4>
     <div>
         <table class="table">
             <thead>
@@ -52,6 +51,10 @@ const onSubmit = () => {
                     <td>{{ data.fullName }}</td>
                 </tr>
                 <tr>
+                    <th>Username</th>
+                    <td>{{ data.username }}</td>
+                </tr>
+                <tr>
                     <th>Email</th>
                     <td>{{ data.email }}</td>
                 </tr>
@@ -68,21 +71,29 @@ const onSubmit = () => {
                     <td>{{ data.prefecture }}</td>
                 </tr>
                 <tr>
-                    <th>Apartment Address</th>
-                    <td>{{ data.apartmentAddress }}</td>
+                    <th>Specialty</th>
+                    <td>{{ data.specialty }}</td>
                 </tr>
                 <tr>
-                    <th>AMKA</th>
-                    <td>{{ data.amka }}</td>
+                    <th>Office Address</th>
+                    <td>{{ data.doctorOfficeAddress }}</td>
                 </tr>
-                <!-- <tr>
-                    <th>Number of Famliy Members</th>
-                    <td>{{ citizenFamilyMembers.length}}</td>
-                </tr> -->
-            </tbody>
+                <tr>
+                    <th>Rating</th>
+                    <td>{{ data.rating }}</td>
+                </tr>
+                <tr>
+                    <th>Appointments Completed</th>
+                    <td>{{ data.appointmentsCompleted }}</td>
+                </tr>
+                <tr>
+                    <th>Maximum Number Of Citizens (as a family doctor)</th>
+                    <td>{{ data.maxNumberOfCitizens }}</td>
+                </tr>
+            </tbody>          
         </table>
     </div>
-    <div v-if="userRoles.includes('ROLE_DOCTOR')">
-        <button @click="onSubmit" type="submit" class="btn btn-primary">Answer</button>
-    </div> 
+    <!-- <div>
+        <button v-if="userRoles.includes('ROLE_DOCTOR')" @click="onSubmit" type="submit" class="btn btn-primary">Answer</button>
+    </div>  -->
 </template>
