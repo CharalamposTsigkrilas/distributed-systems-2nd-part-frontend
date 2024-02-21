@@ -24,10 +24,10 @@ const userRoles = computed(()=> applicationStore.isAuthenticated ? applicationSt
           </li>
           
           <li class="nav-item" v-if="applicationStore.isAuthenticated === true && userRoles.includes('ROLE_CITIZEN')" >
-            <router-link :to="{ name:'citizen', params: { id: applicationStore.userData.id } }" class="nav-link text-white">Citizen</router-link>
+            <router-link :to="{ name:'citizen', params: { id: applicationStore.userData.id } }" class="nav-link text-white">My Profile</router-link>
           </li>
           <li class="nav-item" v-if="applicationStore.isAuthenticated === true && userRoles.includes('ROLE_DOCTOR')">
-            <router-link :to="{ name:'doctor', params: { id: applicationStore.userData.id } }" class="nav-link text-white">Doctor</router-link>
+            <router-link :to="{ name:'doctor', params: { id: applicationStore.userData.id } }" class="nav-link text-white">My Profile</router-link>
           </li>
           <li class="nav-item" v-if="applicationStore.isAuthenticated === true && userRoles.includes('ROLE_ADMIN')">
             <router-link :to="{ name:'citizens'}" class="nav-link text-white">Citizens</router-link>
